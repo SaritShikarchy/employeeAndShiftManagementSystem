@@ -1,0 +1,137 @@
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import { TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Stack,MenuItem, Button} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+//the below import is required in order to recieved the data from {state}
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+ const EMPLOYEES_URL="http://localhost:5000/employees"
+ const SHIFTS_URL= "http://localhost:5000/shifts"
+
+
+const NewShift = () => {
+const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});
+const [employees, setEmployees]= useState([]);
+const [shifts, setShifts]= useState([]);
+const [shift, setShift]= useState({date: '', startingHour:'', endingHour:''});
+
+const navigate = useNavigate();  
+
+useEffect(() => {
+    getAllEmployees();
+    getAllShifts();   
+
+  }, []);
+
+
+ //location is used to recieved the object that is sent from {state}
+ const location = useLocation();
+  //in case there is a user on location.state then save it on 'user'
+ const user = location.state?.user;
+ 
+
+  const getAllEmployees = async () => {
+    const { data } = await axios.get(EMPLOYEES_URL);
+    setEmployees(data);
+  };
+
+   const getAllShifts = async () => {
+    const { data } = await axios.get(SHIFTS_URL);
+    setShifts(data);
+  };
+
+ 
+const addNewShift = async (e) => {
+  //preventing performing refresh
+  e.preventDefault();
+  try {
+
+      await axios.post(SHIFTS_URL, shift);
+
+    
+
+    //?? means that if the left side is null then take the right side of ??
+    alert(`A new shift has beed added`);
+    navigate('/shifts', { state: { user } });
+  } catch (err) {
+    console.error('Failed:', err.response?.data || err.message);
+    alert(err.response?.data?.message || 'Server error: could not add shift');
+  }
+};
+
+   const cancelAddNewShift= (e) =>{
+    e.preventDefault();
+    navigate ('/shifts', { state: { user: user } });
+   }
+
+   
+
+  return (
+    <>
+  <Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>
+       
+        <Grid direction="row" container justifyContent='space-between' sx={{mt:1}} alignItems="center">
+                             <Grid item>
+                                  <Typography sx={{ fontWeight: 'bold', color: 'primary.main'}} > {user? `Hi ${user.name}`:'Hi Guest'}</Typography>
+                                  <Link component={RouterLink} to="/">Log-Out</Link>  
+                                  
+                             </Grid>
+                             <Grid item>
+                               <Stack direction="column" spacing={1}>
+                                 <Link component={RouterLink}   to="/employees"  state={{ user: user }}>Employees page</Link>
+                                  <Link component={RouterLink} to="/departments">Departments Page</Link>
+                                  <Link component={RouterLink} to="/shifts">Shifts Page</Link>  
+                               </Stack>
+                             </Grid>         
+        </Grid>
+        
+
+      <Typography variant="h4" align="center"  sx={{ fontWeight: 'bold', color: 'primary.main', mb: 4, mt:6 }}>Add a new Shift</Typography>
+      <Paper elevation={4} sx={{ padding: 3, bgcolor: '#f5f5f5' }}>
+      <Box component="form"  justifyContent="center" mt={2} mb={2}>
+
+
+            <TextField type="date" label="Shift's Date" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="input-shift-date"
+             variant="filled"  value= {shift.date}  
+             onChange ={(e) =>setShift ({...shift, date:e.target.value}) } 
+slotProps={{
+    inputLabel: {
+      shrink: true       },
+  }}       >
+           </TextField>
+
+             <TextField  label="Shift's Starting Hour" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="input-shift-startingHour"
+             variant="filled"  value= {shift.startingHour}  
+             onChange ={(e) =>setShift ({...shift, startingHour:e.target.value}) } >
+           
+           </TextField>
+
+             <TextField  label="Shift's Ending Hour" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="input-shift-endingHour"
+             variant="filled"  value= {shift.endingHour}  
+             onChange ={(e) =>setShift ({...shift, endingHour:e.target.value}) } >
+             
+           </TextField>
+           
+
+
+
+  <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+            <Grid item>
+                <Button onClick={addNewShift} sx={{ mt:5 , width: '200px'}} variant="contained" >Add A New Shift</Button>
+            </Grid>
+              <Grid item>
+                <Button onClick={cancelAddNewShift}  sx={{ mt:5 , width: '200px'}} variant="contained" >Cancel</Button>
+            </Grid>
+  </Grid>
+
+
+</Box> 
+
+
+</Paper>
+</Container>
+   </>
+  );
+};
+export default NewShift;

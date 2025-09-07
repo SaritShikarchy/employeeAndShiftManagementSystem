@@ -1,0 +1,46 @@
+{
+  "actions": [
+    {
+      "id": 1,
+      "maxActions": 5,
+      "date": "02/09/2025",
+      "actionAllowd": 3
+    },
+    {
+      "id": 1,
+      "maxActions": 5,
+      "date": "03/09/2025",
+      "actionAllowd": 1
+    },
+    {
+      "id": 1,
+      "maxActions": 5,
+      "date": "04/09/2025",
+      "actionAllowd": 2
+    },
+    {
+      "id": 2,
+      "maxActions": 5,
+      "date": "03/09/2025",
+      "actionAllowd": 1
+    },
+    {
+      "id": 2,
+      "maxActions": 20,
+      "date": "07/09/2025",
+      "actionAllowd": 9
+    },
+    {
+      "id": 1,
+      "maxActions": 5,
+      "date": "08/09/2025",
+      "actionAllowd": 1
+    },
+    {
+      "id": 1,
+      "maxActions": 5,
+      "date": "06/09/2025",
+      "actionAllowd": 0
+    }
+  ]
+}
