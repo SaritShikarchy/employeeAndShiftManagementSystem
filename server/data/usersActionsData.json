@@ -31,10 +31,10 @@
       "actionAllowd": 9
     },
     {
-      "id": 1,
-      "maxActions": 5,
+      "id": 2,
+      "maxActions": 50,
       "date": "08/09/2025",
-      "actionAllowd": 1
+      "actionAllowd": 2
     },
     {
       "id": 1,
