@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
+import { useMemo } from 'react';
 
  const EMPLOYEES_URL="http://localhost:5000/employees"
  const DEPARTMETS_URL= "http://localhost:5000/departments"
@@ -29,18 +30,13 @@ useEffect(() => {
 
  //location is used to recieved the object that is sent from {state}
  const location = useLocation();
-  //in case there is a user on location.state then save it on 'user'
- //const user = location.state?.user;
- const userSaved = location.state?.user;
- const user =useMemo (()=> {
-   if (userSaved) return userSaved;
-   try{
-       return JSON.parse (localStorage.getItem('user'))
-   }
-   catch {
-     return null;
-   }
- }, [userSaved])
+  //in case there is a user on location.state then use it, otherwise take the user from localStorage
+const userSaved = location.state?.user;
+const user =useMemo (()=> {
+  if (userSaved) return userSaved;
+  try{return JSON.parse (localStorage.getItem('user'))}
+  catch {return null;}
+}, [userSaved])
  
  
   const getAllEmployees = async () => {

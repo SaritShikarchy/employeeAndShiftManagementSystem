@@ -27,6 +27,7 @@ const Login = () => {
   {  
   const {data} = await axios.get (USERS_PREMISSION_URL);
   const currentUser =data.find((user)=> ((user.username == username) && (user.email == email)));
+  //in case the user is exist then save that user on localStorage
   if (currentUser) {
   localStorage.setItem('user', JSON.stringify(currentUser)); 
 

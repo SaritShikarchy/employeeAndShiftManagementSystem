@@ -32,16 +32,12 @@ const navigate = useNavigate();
 
 //location is used to recieved the object that is sent from {state}
 const location = useLocation();
-//in case there is an user on location.state then save it on 'user'
+  //in case there is a user on location.state then use it, otherwise take the user from localStorage
 const userSaved = location.state?.user;
 const user =useMemo (()=> {
   if (userSaved) return userSaved;
-  try{
-      return JSON.parse (localStorage.getItem('user'))
-  }
-  catch {
-    return null;
-  }
+  try{return JSON.parse (localStorage.getItem('user'))}
+  catch {return null;}
 }, [userSaved])
 
 

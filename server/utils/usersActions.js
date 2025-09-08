@@ -1,8 +1,7 @@
 //const express= require ('./express')
 const jf= require('jsonfile');
 const path = require('path');
-
-//const USERS_ACTIONS= 'data/usersActionsData.json'
+//used in order to save the absolute location of usersActionsData.json
 const USERS_ACTIONS = path.resolve(__dirname, '../data/usersActionsData.json');
 
 

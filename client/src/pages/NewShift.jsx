@@ -5,6 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 //the below import is required in order to recieved the data from {state}
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 
  const EMPLOYEES_URL="http://localhost:5000/employees"
  const SHIFTS_URL= "http://localhost:5000/shifts"
@@ -27,8 +28,13 @@ useEffect(() => {
 
  //location is used to recieved the object that is sent from {state}
  const location = useLocation();
-  //in case there is a user on location.state then save it on 'user'
- const user = location.state?.user;
+  //in case there is a user on location.state then use it, otherwise take the user from localStorage
+const userSaved = location.state?.user;
+const user =useMemo (()=> {
+  if (userSaved) return userSaved;
+  try{return JSON.parse (localStorage.getItem('user'))}
+  catch {return null;}
+}, [userSaved])
  
 
   const getAllEmployees = async () => {

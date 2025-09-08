@@ -35,17 +35,13 @@ const EditShift = () => {
   //in case there is an user on location.state then save it on 'user'
   //const department = location.state?.department;
   
-  //const user = location.state?.user;
-  const userSaved = location.state?.user;
-  const user =useMemo (()=> {
-    if (userSaved) return userSaved;
-    try{
-        return JSON.parse (localStorage.getItem('user'))
-    }
-    catch {
-      return null;
-    }
-  }, [userSaved])
+   //in case there is a user on location.state then use it, otherwise take the user from localStorage
+const userSaved = location.state?.user;
+const user =useMemo (()=> {
+  if (userSaved) return userSaved;
+  try{return JSON.parse (localStorage.getItem('user'))}
+  catch {return null;}
+}, [userSaved])
 
   useEffect(() => {
   getAllEmployees()
