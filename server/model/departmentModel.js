@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const Employee = require('./employeeModel');
 
 const departmentSchema =new mongoose.Schema({
 name: String,

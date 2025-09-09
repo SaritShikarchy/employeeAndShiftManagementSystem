@@ -28,8 +28,9 @@
       "id": 2,
       "maxActions": 500,
       "date": "09/09/2025",
-      "actionAllowd": 3
-    },{
+      "actionAllowd": 13
+    },
+    {
       "id": 2,
       "maxActions": 500,
       "date": "10/09/2025",

@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//we need to define the {Link} as below in order not to have a conflict with material UI Link
-//import {Link as RouterLink} from 'react-router-dom'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {Avatar, Container, Paper, Typography, Box ,TextField, Button } from "@mui/material"
 
@@ -14,7 +12,6 @@ const USERS_PREMISSION_URL='https://jsonplaceholder.typicode.com/users'
 const Login = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  //using setUsers was problematic since it takes time and the data wasn't managed to move to users
   const navigate = useNavigate();
 
   const handleSubmit =async (e) => {
@@ -39,7 +36,6 @@ const Login = () => {
             return;
           }
         //checks if actions allowed for this user and decrease 'actionAllowd' for this user
-        // TODELETE- sarit -test {actionsAllowedClientUtils(currentUser)}
         console.log(userId)
         const res= await actionsAllowedClientUtils(userId);
         if (!actionHandlerUtils(res, navigate)) return;
@@ -59,16 +55,8 @@ const Login = () => {
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt:1}}>
               <TextField placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} fullWidth required autoFocus sx={{mb:2}}></TextField>
               <TextField placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth required sx={{mb:2}}></TextField>
-              {/* <FormControlLabel control={<Checkbox value="remember" color="primary"/>} label="Remember me"/> */}
               <Button type="submit" variant="contained" fullWidth sx={{mt:1}}>Sign In</Button>
         </Box>
-        {/* <Grid container justifyContent='space-between' sx={{mt:1}}>
-            <Grid item> */}
-              {/* Link is a jsx componennt, we can not use here 'navigate' */}
-                {/* <Link component={RouterLink} to="/forgotPage">Forgot Password?</Link> */}
-                {/* <Link component={RouterLink} to="/register">Sign Up</Link> */}
-            {/* </Grid>
-        </Grid> */}
       </Paper>
     </Container>
    </>

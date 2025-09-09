@@ -20,7 +20,7 @@ const Employees = () => {
   const [selectedDept, setSelectedDept] = useState(""); 
   //location is used to recieved the object that is sent from {state}
   const location = useLocation();
-   //in case there is a user on location.state then use it, otherwise take the user from localStorage
+  //in case there is a user on location.state then use it, otherwise take the user from localStorage
   const userSaved = location.state?.user;
   const user =useMemo (()=> {
         if (userSaved) return userSaved;
@@ -60,14 +60,13 @@ const Employees = () => {
     navigate ('/NewEmployee', {state:{user:user}})
    }
 
-   const employeesToShow = selectedDept
+  const employeesToShow = selectedDept
     ? employees.filter(e => String(e.departmentId) === String(selectedDept))
     : employees;
 
   return (    
      // will use 'Segoe UI' , in case it won't be regocnize then use 'sans-serif'
-    <Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>
-       
+    <Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>    
       <Grid direction="row" container justifyContent='space-between' sx={{mt:1}} alignItems="center">
         <Grid item>
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main'}} > {user? `Hi ${user.name}`:'Hi Guest'}</Typography>
@@ -101,7 +100,7 @@ const Employees = () => {
               const shiftsPerEmployee = shifts.filter(shift => shiftIDs.includes(shift._id));
 
               return (
-                //hover means that once going over the row it will be colored by default (but it also can be determine by user)
+                //hover means that once going over the row it will be colored by default
                 <TableRow key={emp._id} hover>
                   <TableCell>
                     <Link
@@ -154,9 +153,8 @@ const Employees = () => {
       <Typography variant="h4" align="center"  sx={{ fontWeight: 'bold', color: 'primary.main', mb: 4, mt:6 }}>Filter By Department</Typography>
       <Paper elevation={4} sx={{ padding: 3, bgcolor: '#f5f5f5' }}>
           <TextField select 
-          //slotProps={{ select: { native: true } }}  -> means to use the regular 'select' and not MUI select
           slotProps={{ select: { native: true } }}  sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="filled-select-department"
-           variant="filled"  value= {selectedDept}  onChange={(e) => setSelectedDept(e.target.value)}>
+          variant="filled"  value= {selectedDept}  onChange={(e) => setSelectedDept(e.target.value)}>
           {/* when selecting 'All departments' then no filter will be done */}
            <option value="">All departments</option>
            {departments.map(dep => (<option key={dep._id} value={dep._id}>{dep.name}</option> ))}
