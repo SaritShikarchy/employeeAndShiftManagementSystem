@@ -9,6 +9,7 @@ import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
 //const EMPLOYEES_URL="http://localhost:5000/employees"
 const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
+const DEPARTMENT_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`; 
 
 const NewDepartment = () => {
     const [employees, setEmployees]= useState([]);
