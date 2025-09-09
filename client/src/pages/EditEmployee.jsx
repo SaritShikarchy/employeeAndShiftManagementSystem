@@ -1,23 +1,19 @@
-import {Container,Grid,Stack, Typography,Link,Paper,Box,TextField,MenuItem,Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState,  useEffect  } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-//the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import Employees from './Employees';
-import { Table, TableHead, TableBody, TableRow, TableCell} from '@mui/material';
-import { toDateInputValue,  todayISO } from '../utils/dateUtils';
+//useLocation is required in order to recieved the data from {state}
+import { Link as RouterLink, useNavigate, useParams, useLocation } from 'react-router-dom';
+//useMemo is for saving the user
+import { useState,  useEffect, useMemo  } from 'react';
+// 8.9. import Employees from './Employees';
+import {Container,Grid,Stack, Typography,Link,Paper,Box,TextField,MenuItem,Button, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+
+import { toDateInputValue } from '../utils/dateUtils';
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
-//for saving the user
-import { useMemo } from 'react';
 
 const EMPLOYEES_URL='http://localhost:5000/employees'
 const DEPARTMENT_URL='http://localhost:5000/departments'
 const EMPLOYEES_SHIFTS_URL='http://localhost:5000/employeesShifts'
 const SHIFTS_URL= 'http://localhost:5000/shifts'
-
 
 const EditEmployee = () => {
 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '' , departmentId:''});
@@ -40,7 +36,6 @@ const user =useMemo (()=> {
   catch {return null;}
 }, [userSaved])
 
-
 useEffect(() => {
   getAllShifts()
   getAllemployeesShifts()
@@ -57,48 +52,56 @@ useEffect(() => {
 const getEmployeeById =async()=>{
   const {data} =await axios.get(`${EMPLOYEES_URL}/${id}`)
   setEmployee (data)
-  }
+}
 
 const getAllemployeesShifts =async()=>{
   const {data} =await axios.get(EMPLOYEES_SHIFTS_URL)
   setEmployeesShifts (data)
-  }
+}
 
 const getAllDepartments = async() =>{
   const {data}=  await axios.get (DEPARTMENT_URL)
   setDepartments (data)
-  }
+}
 
 const getAllShifts = async() =>{
   const {data}=  await axios.get (SHIFTS_URL)
   setShifts(data)
-  }
+}
 
 const updateEmployee= async() =>{
+  //locate the value of user.id
+      const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
+
+      if (!userId) {
+        alert('Please reconnect to system');
+        navigate('/', { replace: true });
+        return;
+      }
+      
     const obj=employee
     await axios.put(`${EMPLOYEES_URL}/${id}`, obj)
     alert (`${employee.firstName} was updated`)
     navigate ('/employees', { state: { user: user } });
-   }
+}
 
 const deleteEmployee= async() =>{
   await axios.delete(`${EMPLOYEES_URL}/${id}`)
   await axios.delete(`${EMPLOYEES_SHIFTS_URL}/emp/${id}`);
   navigate ('/employees', { state: { user: user } });
-  }
+}
 
 const associateShiftToEmployee= async() =>{
   await axios.post(EMPLOYEES_SHIFTS_URL,employeesShift)
    navigate ('/employees', { state: { user: user } });
   alert (`The new shift was added to ${employee.firstName}${employee.lastName} `)
-  }
+}
 
 const filteredEmployeesShift= employeesShifts.filter ((empShift) => (employee._id === empShift.employeeId))
 //employeeShiftIds includes all shiftId of the specipic employee
 const employeeShiftIds = new Set(filteredEmployeesShift.map(filterEmpShipt => String(filterEmpShipt.shiftId)));
 //shiftsPerEmployee includes all the shifts that related to the specipic employee
 const shiftsPerEmployee = shifts.filter(shift => employeeShiftIds.has(String(shift._id)));
-
 
 const onUpdate = async () => {
   const userId = typeof user === 'string'
@@ -117,7 +120,6 @@ const onUpdate = async () => {
   if (!actionHandlerUtils(res, navigate)) return;
   await updateEmployee();
 };
-
 
 return (
     <>
@@ -143,42 +145,38 @@ return (
     <Typography variant="h4" align="center"  sx={{ fontWeight: 'bold', color: 'primary.main', mb: 4, mt:6 }}>Edit Employee</Typography>
     <Paper elevation={4} sx={{ padding: 3, bgcolor: '#f5f5f5' }}>
     
-
       <Box sx={{ width: 250, maxWidth: '100%', mx: 'auto', mt: 2 }}>
-  <Stack spacing={2}>
-    <TextField label="First Name" variant="filled" fullWidth value={employee.firstName}
-        onChange={(e) =>setEmployee({ ...employee, firstName: e.target.value })}></TextField><br/>
+        <Stack spacing={2}>
+            <TextField label="First Name" variant="filled" fullWidth value={employee.firstName}
+                onChange={(e) =>setEmployee({ ...employee, firstName: e.target.value })}></TextField><br/>
 
-    <TextField label="Last Name" variant="filled" fullWidth value={employee.lastName}
-        onChange={(e) =>setEmployee({ ...employee, lastName: e.target.value })}></TextField><br/>
+            <TextField label="Last Name" variant="filled" fullWidth value={employee.lastName}
+                onChange={(e) =>setEmployee({ ...employee, lastName: e.target.value })}></TextField><br/>
 
-    <TextField
-      label="Start Work Year"
-    
-      variant="filled"
-      fullWidth
-      //slotProps- in order not to hide the header in this textBox
-      slotProps={{ inputLabel: { shrink: true } }}
-        value= {employee?.startWorkYear}
-        onChange ={(e) => setEmployee ({...employee, startWorkYear:e.target.value})}>
-        </TextField><br/>
+            <TextField
+                label="Start Work Year"
+                variant="filled"
+                fullWidth
+                //slotProps- in order not to hide the header in this textBox
+                slotProps={{ inputLabel: { shrink: true } }}
+                value= {employee?.startWorkYear}
+                onChange ={(e) => setEmployee ({...employee, startWorkYear:e.target.value})}>
+              </TextField><br/>
 
-    <TextField
-      select
-      label="Department ID"
-      variant="filled"
-      fullWidth
-      //for value I added ?? to prevent undefined
-    value= {employee.departmentId ?? ''} onChange ={(e) =>setEmployee ({...employee, departmentId:e.target.value}) } >
-      <MenuItem value="">No department is selected</MenuItem>
-            {departments.map((dep) => (
-              <MenuItem key={dep._id} value={dep._id}>{dep.name}</MenuItem>
-            ))}
-        </TextField>
-      {/* </MenuItem> */}
-   {/* </TextField> */}
-  </Stack> 
-</Box>
+              <TextField
+                select
+                label="Department ID"
+                variant="filled"
+                fullWidth
+                //for value I added ?? to prevent undefined
+                value= {employee.departmentId ?? ''} onChange ={(e) =>setEmployee ({...employee, departmentId:e.target.value}) } >
+                <MenuItem value="">No department is selected</MenuItem>
+                      {departments.map((dep) => (
+                        <MenuItem key={dep._id} value={dep._id}>{dep.name}</MenuItem>
+                      ))}
+              </TextField>
+        </Stack> 
+      </Box>
                     
       <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 2 }}>
         <Grid item>
@@ -207,7 +205,6 @@ return (
               return  <TableRow key={shift._id}>
                   {/* <TableCell>{new Date(shift.date).toLocaleDateString('he-IL')}</TableCell>  */}
                    <TableCell>{toDateInputValue(shift.date)}</TableCell> 
-                  
                   <TableCell>{shift.startingHour}</TableCell>
                   <TableCell>{shift.endingHour}</TableCell>
               </TableRow>         
@@ -231,7 +228,6 @@ return (
               <Button  sx={{ width: '100px'}} variant="contained" onClick={associateShiftToEmployee}>Add</Button>
             </Grid>
           </Grid>
-
   </Paper>                  
 </Container>  
          

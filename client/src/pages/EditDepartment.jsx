@@ -1,12 +1,12 @@
-import {Container,Grid,Stack, Typography,Link,Paper,Box,TextField,MenuItem,Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState,  useEffect  } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-//the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import Employees from './Employees';
-import { useMemo } from 'react';
+//useLocation is required in order to recieved the data from {state}
+import { Link as RouterLink, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useState,  useEffect, useMemo } from 'react';
+//import Employees from './Employees';
+import {Container,Grid,Stack, Typography,Link,Paper,Box,TextField,MenuItem,Button } from '@mui/material';
+
+import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
+import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
 const EMPLOYEES_URL='http://localhost:5000/employees'
 const DEPARTMENT_URL='http://localhost:5000/departments'
@@ -59,6 +59,15 @@ const user =useMemo (()=> {
   }
 
   const updateDepartment= async() =>{
+    //locate the value of user.id
+      const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
+
+      if (!userId) {
+        alert('Please reconnect to system');
+        navigate('/', { replace: true });
+        return;
+      }
+     
     try{
         const obj=currentDepartment
         await axios.put(`${DEPARTMENT_URL}/${id}`, obj)
@@ -69,6 +78,10 @@ const user =useMemo (()=> {
       catch (error) {
           console.log ('error updating department:', error);
       }
+
+       const res= await actionsAllowedClientUtils(userId);
+      //res includes {ok: false} or {ok: true}
+      if (!actionHandlerUtils(res, navigate)) return;
     
    }
 
@@ -165,10 +178,10 @@ const user =useMemo (()=> {
                </Grid>         
               </Grid>
         
-             <Typography variant="h6" align="center"  sx={{ fontWeight: 'bold', color: 'black', mb: 4, mt:6 }}>Associate employee to this department:</Typography>
+             <Typography variant="h6" align="center"  sx={{ fontWeight: 'bold', color: 'black', mb: 4, mt:6 }}>Assign employee to this department:</Typography>
 
              {/* value= {currentEmployToUpdateDepartment._id}  is adjusted to value={emp._id}, and the associate {emp.firstName} {emp.lastName} is displayed*/}
-             <TextField select label="Employee to associate to this department:" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="filled-select-currency-native"
+             <TextField select label="Employee to assign to this department:" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '400px', ml:31}} id="filled-select-currency-native"
               variant="filled"   value= {currentEmployToUpdateDepartment?._id ?? ''} 
       
               onChange={(e) => {
@@ -199,7 +212,7 @@ const user =useMemo (()=> {
         </Grid>
          <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 2 }}>
                     <Grid item>
-                        <Button  type="button" sx={{ mt:5 , width: '200px'}} variant="contained" onClick={addDepartment}>Add a new Department</Button>
+                        <Button  type="button" sx={{ mt:5 , width: '400px'}} variant="contained" onClick={addDepartment}>Add a new Department</Button>
                     </Grid>
                 </Grid>
 </Box>

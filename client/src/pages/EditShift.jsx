@@ -10,7 +10,7 @@ import CalendarToday from "@mui/icons-material/CalendarToday";
 import {  InputAdornment, IconButton } from "@mui/material";
 import { toDateInputValue,  todayISO } from '../utils/dateUtils';
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
-//import {handleActionUtils } from '../utils/handleActionUtils';
+import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 import { useMemo } from 'react';
 
 const EMPLOYEES_URL='http://localhost:5000/employees'
@@ -43,6 +43,14 @@ const user =useMemo (()=> {
   catch {return null;}
 }, [userSaved])
 
+ const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
+    
+          if (!userId) {
+            alert('Please reconnect to system');
+            navigate('/', { replace: true });
+            return;
+          }
+
   useEffect(() => {
   getAllEmployees()
   getAllShifts()
@@ -69,7 +77,10 @@ const user =useMemo (()=> {
       }     
       catch (error) {
           console.log ('error updating shift:', error);
-      }    
+      }  
+      const res= await actionsAllowedClientUtils(userId);
+          //res includes {ok: false} or {ok: true}
+          if (!actionHandlerUtils(res, navigate)) return;  
    }
 
   const addShift = (e) =>{
@@ -78,6 +89,9 @@ const user =useMemo (()=> {
   }
    
   const updateEmployeeShift= async() =>{
+    //locate the value of user.id
+         
+          
       try{
            await axios.post(EMPLOYEES_SHIFTS_URL, currentEmployToUpdateShift)
            alert (`The Employee was associated to the Shift`)
@@ -86,6 +100,9 @@ const user =useMemo (()=> {
       catch (error) {
           console.log('error updating the shift', error)
       }
+      const res= await actionsAllowedClientUtils(userId);
+          //res includes {ok: false} or {ok: true}
+          if (!actionHandlerUtils(res, navigate)) return;
   }
    
   const findShiftById= async() =>{

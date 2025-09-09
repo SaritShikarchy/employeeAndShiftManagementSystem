@@ -1,27 +1,21 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Stack, TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Button} from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-//the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+//useLocation is required in order to recieved the data from {state}
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
+import { Stack, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Button} from '@mui/material';
 
 const EMPLOYEES_URL = 'http://localhost:5000/employees';
-const DEPARTMENT_URL = 'http://localhost:5000/departments';
-const EMPLOYEES_SHIFTS_URL = 'http://localhost:5000/employeesShifts';
+// const DEPARTMENT_URL = 'http://localhost:5000/departments';
+// const EMPLOYEES_SHIFTS_URL = 'http://localhost:5000/employeesShifts';
 const SHIFTS_URL = 'http://localhost:5000/shifts';
-
-
-
 
 const Shifts = () => {
     const [employees, setEmployees] = useState([]);
-    const [employeeShifts, setEmployeeShifts] = useState([]);
+  // 9.9 const [employeeShifts, setEmployeeShifts] = useState([]);
     const [shifts, setShifts] = useState([]);
 
     //filtered amployees according department
-    const [selectedDept, setSelectedDept] = useState(""); 
+   //9.9. const [selectedDept, setSelectedDept] = useState(""); 
 
     //location is used to recieved the object that is sent from {state}
     const location = useLocation();
@@ -36,7 +30,7 @@ const user =useMemo (()=> {
 
     useEffect(() => {
       getAllEmployees();
-      getAllEmployeesShifts();
+     //9.9 getAllEmployeesShifts();
       getAllShifts();
     }, []);
 
@@ -46,10 +40,10 @@ const user =useMemo (()=> {
     };
 
   
-    const getAllEmployeesShifts = async () => {
-      const { data } = await axios.get(EMPLOYEES_SHIFTS_URL);
-      setEmployeeShifts(data);
-    };
+    // const getAllEmployeesShifts = async () => {
+    //   const { data } = await axios.get(EMPLOYEES_SHIFTS_URL);
+    //   setEmployeeShifts(data);
+    // };
 
     const getAllShifts = async () => {
       const { data } = await axios.get(SHIFTS_URL);
@@ -61,11 +55,11 @@ const user =useMemo (()=> {
       navigate ('/newShift', {state:{user:user}})
     }
 
-    const employeesToShow = selectedDept
-      ? employees.filter(e => String(e.departmentId) === String(selectedDept))
-      : employees;
+    // 9.9. const employeesToShow = selectedDept
+    //   ? employees.filter(e => String(e.departmentId) === String(selectedDept))
+    //   : employees;
 
-    return (
+return (
           
       // will use 'Segoe UI' , in case it won't be regocnize then use 'sans-serif'
       <Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>

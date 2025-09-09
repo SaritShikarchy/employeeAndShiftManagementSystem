@@ -1,28 +1,26 @@
-import { useState, useEffect } from "react";
 import axios from 'axios';
-import { TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Stack,MenuItem, Button} from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-//the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo} from "react";
+//useLocation is required in order to recieved the data from {state}
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { TextField, Grid, Paper, Typography, Container, Link, Box , Stack,MenuItem, Button} from '@mui/material';
+
+import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
+import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
 const EMPLOYEES_URL="http://localhost:5000/employees"
 const DEPARTMETS_URL= "http://localhost:5000/departments"
 
-
-
 const NewDepartment = () => {
-    const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});
+  //  9.9 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});
     const [employees, setEmployees]= useState([]);
-    const [departments, setDepartments]= useState([]);
+  //9.9  const [departments, setDepartments]= useState([]);
     const [department, setDepartment]= useState({name: '', manager:''});
 
     const navigate = useNavigate();  
 
     useEffect(() => {
         getAllEmployees();
-        getAllDepartments();   
+       //9.9. getAllDepartments();   
       }, []);
 
     //location is used to recieved the object that is sent from {state}
@@ -40,14 +38,25 @@ const user =useMemo (()=> {
       setEmployees(data);
     };
 
-    const getAllDepartments = async () => {
-      const { data } = await axios.get(DEPARTMETS_URL);
-      setDepartments(data);
-    };
+    // 9.9 const getAllDepartments = async () => {
+    //   const { data } = await axios.get(DEPARTMETS_URL);
+    //   setDepartments(data);
+    // };
 
     const addDepartmentAndManagerProcess = async (e) => {
       //preventing performing refresh
       e.preventDefault();
+      //locate the value of user.id
+            const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
+      
+            if (!userId) {
+              alert('Please reconnect to system');
+              navigate('/', { replace: true });
+              return;
+            }
+            const res= await actionsAllowedClientUtils(userId);
+            //res includes {ok: false} or {ok: true}
+            if (!actionHandlerUtils(res, navigate)) return;
       try {
         //res includes the opject that was added, according the post defenition
         const res = await axios.post(DEPARTMETS_URL, department);

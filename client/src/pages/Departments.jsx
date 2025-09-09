@@ -1,25 +1,22 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Stack, TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Button} from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
 //the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Stack, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Button} from '@mui/material';
 
 const EMPLOYEES_URL = 'http://localhost:5000/employees';
 const DEPARTMENT_URL = 'http://localhost:5000/departments';
-const EMPLOYEES_SHIFTS_URL = 'http://localhost:5000/employeesShifts';
-const SHIFTS_URL = 'http://localhost:5000/shifts';
+//const EMPLOYEES_SHIFTS_URL = 'http://localhost:5000/employeesShifts';
+//const SHIFTS_URL = 'http://localhost:5000/shifts';
 
 const Departments = () => {
     const [employees, setEmployees] = useState([]);
     const [departments, setDepartments] = useState([]);
-    const [employeeShifts, setEmployeeShifts] = useState([]);
-    const [shifts, setShifts] = useState([]);
+//  9.9. const [employeeShifts, setEmployeeShifts] = useState([]);
+//  9.9.  const [shifts, setShifts] = useState([]);
 
     //filtered amployees according department
-    const [selectedDept, setSelectedDept] = useState(""); 
+    // 8.9.const [selectedDept, setSelectedDept] = useState(""); 
     //location is used to recieved the object that is sent from {state}
     const location = useLocation();
       //in case there is a user on location.state then use it, otherwise take the user from localStorage
@@ -34,8 +31,8 @@ const user =useMemo (()=> {
     useEffect(() => {
       getAllEmployees();
       getAllDepartments();
-      getAllEmployeesShifts();
-      getAllShifts();
+      //getAllEmployeesShifts();
+    //  getAllShifts();
     }, []);
 
     const getAllEmployees = async () => {
@@ -48,15 +45,15 @@ const user =useMemo (()=> {
       setDepartments(data);
     };
 
-    const getAllEmployeesShifts = async () => {
-      const { data } = await axios.get(EMPLOYEES_SHIFTS_URL);
-      setEmployeeShifts(data);
-    };
+    // const getAllEmployeesShifts = async () => {
+    //   const { data } = await axios.get(EMPLOYEES_SHIFTS_URL);
+    //   setEmployeeShifts(data);
+    // };
 
-    const getAllShifts = async () => {
-      const { data } = await axios.get(SHIFTS_URL);
-      setShifts(data);
-    };
+    // const getAllShifts = async () => {
+    //   const { data } = await axios.get(SHIFTS_URL);
+    //   setShifts(data);
+    // };
 
     const createNewDepartment=() =>{
       navigate ('/NewDepartment', {state:{user:user}})

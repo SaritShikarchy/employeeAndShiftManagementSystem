@@ -1,11 +1,9 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Stack, TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Button} from '@mui/material';
+import { useState, useEffect, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 //the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Stack, TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Button} from '@mui/material';
 
 const EMPLOYEES_URL = 'http://localhost:5000/employees';
 const DEPARTMENT_URL = 'http://localhost:5000/departments';
@@ -23,12 +21,12 @@ const Employees = () => {
   //location is used to recieved the object that is sent from {state}
   const location = useLocation();
    //in case there is a user on location.state then use it, otherwise take the user from localStorage
-const userSaved = location.state?.user;
-const user =useMemo (()=> {
-  if (userSaved) return userSaved;
-  try{return JSON.parse (localStorage.getItem('user'))}
-  catch {return null;}
-}, [userSaved])
+  const userSaved = location.state?.user;
+  const user =useMemo (()=> {
+        if (userSaved) return userSaved;
+        try{return JSON.parse (localStorage.getItem('user'))}
+        catch {return null;}
+  }, [userSaved])
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,11 +97,8 @@ const user =useMemo (()=> {
             {employeesToShow.map((emp) => {
               const departmentForEmp = departments.find(dep => dep._id === emp.departmentId);
               const shiftsIDPerEmployee = employeeShifts.filter(es => es.employeeId === emp._id);
-              //console.log("shiftsIDPerEmployee", shiftsIDPerEmployee)
               const shiftIDs = shiftsIDPerEmployee.map(shift => shift.shiftId);
-             // console.log("shiftIDs", shiftIDs)
               const shiftsPerEmployee = shifts.filter(shift => shiftIDs.includes(shift._id));
-             // console.log("shiftsPerEmployee", shiftsPerEmployee)
 
               return (
                 //hover means that once going over the row it will be colored by default (but it also can be determine by user)

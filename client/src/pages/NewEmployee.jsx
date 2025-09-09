@@ -1,36 +1,30 @@
-import { useState, useEffect } from "react";
 import axios from 'axios';
-import { TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Box , Stack,MenuItem, Button} from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-//the below import is required in order to recieved the data from {state}
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from "react";
+//useLocation is required in order to recieved the data from {state}
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { TextField, Grid, Paper, Typography, Container, Link, Box , Stack,MenuItem, Button} from '@mui/material';
+
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
-import { useMemo } from 'react';
 
- const EMPLOYEES_URL="http://localhost:5000/employees"
- const DEPARTMETS_URL= "http://localhost:5000/departments"
-
+const EMPLOYEES_URL="http://localhost:5000/employees"
+const DEPARTMETS_URL= "http://localhost:5000/departments"
 
 const NewEmployee = () => {
-const today = new Date().toISOString().slice(0, 10);
+//const today = new Date().toISOString().slice(0, 10);
 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});
-const [employees, setEmployees]= useState([]);
+//const [employees, setEmployees]= useState([]);
 const [departments, setDepartments]= useState([]);
-
 const navigate = useNavigate();  
 
 useEffect(() => {
-    getAllEmployees();
+    //getAllEmployees();
     getAllDepartments();   
-
   }, []);
 
-
- //location is used to recieved the object that is sent from {state}
- const location = useLocation();
-  //in case there is a user on location.state then use it, otherwise take the user from localStorage
+//location is used to recieved the object that is sent from {state}
+const location = useLocation();
+//in case there is a user on location.state then use it, otherwise take the user from localStorage
 const userSaved = location.state?.user;
 const user =useMemo (()=> {
   if (userSaved) return userSaved;
@@ -38,50 +32,45 @@ const user =useMemo (()=> {
   catch {return null;}
 }, [userSaved])
  
- 
-  const getAllEmployees = async () => {
-    const { data } = await axios.get(EMPLOYEES_URL);
-    setEmployees(data);
-  };
+// const getAllEmployees = async () => {
+//     const { data } = await axios.get(EMPLOYEES_URL);
+//     setEmployees(data);
+//   };
 
-   const getAllDepartments = async () => {
+const getAllDepartments = async () => {
     const { data } = await axios.get(DEPARTMETS_URL);
     setDepartments(data);
   };
 
-  const addEmployeeProcess= async(e) =>{
-    e.preventDefault();
-    const userId = typeof user === 'string'
-    ? user
-    : user?.id ?? user?._id ?? user?.userId;
+const addEmployeeProcess= async(e) =>{
+      e.preventDefault();
+      //locate the value of user.id
+      const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
 
-  if (!userId) {
-    alert('Please reconnect to system');
-    navigate('/', { replace: true });
-    return;
-  }
-    const res= await actionsAllowedClientUtils(userId);
-    //res includes {ok: false} or {ok: true}
-  if (!actionHandlerUtils(res, navigate)) return;
-  
-  await axios.post (EMPLOYEES_URL, employee)
-     alert (`${employee.firstName} was added`)
-     navigate ('/employees', { state: { user: user } });
-   }
+      if (!userId) {
+        alert('Please reconnect to system');
+        navigate('/', { replace: true });
+        return;
+      }
+      const res= await actionsAllowedClientUtils(userId);
+      //res includes {ok: false} or {ok: true}
+      if (!actionHandlerUtils(res, navigate)) return;
+      
+      await axios.post (EMPLOYEES_URL, employee)
+        alert (`${employee.firstName} was added`)
+        navigate ('/employees', { state: { user: user } });
+}
 
-   const cancelAddEmployeeProcess= (e) =>{
+const cancelAddEmployeeProcess= (e) =>{
     e.preventDefault();
     navigate ('/employees', { state: { user: user } });
-   }
-
-   
-
-
-  return (
+}
+  
+return (
     <>
-<Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>
+  <Container maxWidth="md" sx={{ fontFamily: 'Segoe UI, sans-serif', mt: 4 }}>
        
-        <Grid direction="row" container justifyContent='space-between' sx={{mt:1}} alignItems="center">
+      <Grid direction="row" container justifyContent='space-between' sx={{mt:1}} alignItems="center">
         <Grid item>
           <Typography sx={{ fontWeight: 'bold', color: 'primary.main'}} > {user? `Hi ${user.name}`:'Hi Guest'}</Typography>
           <Link component={RouterLink} to="/">Log-Out</Link>                 
@@ -94,8 +83,7 @@ const user =useMemo (()=> {
             <Link component={RouterLink} to="/shifts">Shifts Page</Link>  
           </Stack>
         </Grid> 
-    </Grid>
-
+     </Grid>
 
       <Typography variant="h4" align="center"  sx={{ fontWeight: 'bold', color: 'primary.main', mb: 4, mt:6 }}>Add a new employee</Typography>
       <Paper elevation={4} sx={{ padding: 3, bgcolor: '#f5f5f5' }}>
@@ -109,29 +97,26 @@ const user =useMemo (()=> {
                <TextField sx={{ display: 'block', mx: 'auto', mt: 2, mb: 2, width: '300px'}}   slotProps={{ inputLabel: { shrink: true } }}  id="filled-basic" label="Start Work Year" variant="filled"   value={employee.startWorkYear|| ""} 
               onChange={(e) => setEmployee({ ...employee, startWorkYear: e.target.value })}></TextField><br/>
 
-            <TextField select label="Department ID" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="filled-select-currency-native"
-             variant="filled"  value= {employee.departmentId}  
-             onChange ={(e) =>setEmployee ({...employee, departmentId:e.target.value}) } >
-            {departments.map((dep) => (
-          <MenuItem key={dep._id} value={dep._id}>{dep.name}</MenuItem>
-                  ))}
-           </TextField>
-  <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-            <Grid item>
-                <Button onClick={addEmployeeProcess} sx={{ mt:5 , width: '200px'}} variant="contained" >Add Employee</Button>
-            </Grid>
+              <TextField select label="Department ID" sx={{  align:"center", mx: 'auto', mt: 2, mb: 2, width: '220px', ml:31}} id="filled-select-currency-native"
+              variant="filled"  value= {employee.departmentId}  
+              onChange ={(e) =>setEmployee ({...employee, departmentId:e.target.value}) } >
+              {departments.map((dep) => (
+            <MenuItem key={dep._id} value={dep._id}>{dep.name}</MenuItem>
+                    ))}
+            </TextField>
+    <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ mt: 2 }}>
               <Grid item>
-                <Button onClick={cancelAddEmployeeProcess}  sx={{ mt:5 , width: '200px'}} variant="contained" >Cancel</Button>
-            </Grid>
-  </Grid>
-
-
+                  <Button onClick={addEmployeeProcess} sx={{ mt:5 , width: '200px'}} variant="contained" >Add Employee</Button>
+              </Grid>
+                <Grid item>
+                  <Button onClick={cancelAddEmployeeProcess}  sx={{ mt:5 , width: '200px'}} variant="contained" >Cancel</Button>
+              </Grid>
+    </Grid>
 </Box> 
-
-
 </Paper>
 </Container>
    </>
   );
 };
+
 export default NewEmployee;
