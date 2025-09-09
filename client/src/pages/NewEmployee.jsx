@@ -9,6 +9,7 @@ import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
 //const EMPLOYEES_URL="http://localhost:5000/employees"
 const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
+const DEPARTMENTS_URL= `${import.meta.env.VITE_BACKEND_URL}/departments`;
 
 const NewEmployee = () => {
 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});
@@ -30,7 +31,7 @@ const user =useMemo (()=> {
 }, [userSaved])
  
 const getAllDepartments = async () => {
-    const { data } = await axios.get(DEPARTMETS_URL);
+    const { data } = await axios.get(DEPARTMENTS_URL);
     setDepartments(data);
   };
 

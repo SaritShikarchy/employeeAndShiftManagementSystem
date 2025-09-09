@@ -27,25 +27,24 @@ const EditShift = () => {
   const [shifts, setShifts] = useState([]);
   const [currentEmployToUpdateShift, setCurrentEmployToUpdateShift] = useState({ employeeId:'', shiftId:''});
 
-  //means that the id is the departement id which taken from the page's params
+  //means that the id is the department id which taken from the page's params
   const { id } = useParams();
   const navigate = useNavigate();
 
   //location is used to recieved the object that is sent from {state}
   const location = useLocation();
   //in case there is an user on location.state then save it on 'user'
-  //const department = location.state?.department;
   
-   //in case there is a user on location.state then use it, otherwise take the user from localStorage
-const userSaved = location.state?.user;
-const user =useMemo (()=> {
-  if (userSaved) return userSaved;
-  try{return JSON.parse (localStorage.getItem('user'))}
-  catch {return null;}
-}, [userSaved])
+  //in case there is a user on location.state then use it, otherwise take the user from localStorage
+  const userSaved = location.state?.user;
+  const user =useMemo (()=> {
+    if (userSaved) return userSaved;
+    try{return JSON.parse (localStorage.getItem('user'))}
+    catch {return null;}
+  }, [userSaved])
 
  const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
-    
+   
           if (!userId) {
             alert('Please reconnect to system');
             navigate('/', { replace: true });
