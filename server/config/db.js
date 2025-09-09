@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
-const connectDB= () => {
-    mongoose
-    .connect('mongodb://localhost:27017/employeesDB')
-    .then(() => console.log ('Connected to employeesDB'))
-    .catch (console.log)
+const mongodbUrl = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/employeesDB';
+
+function connectDB() {
+  return mongoose
+    .connect(mongodbUrl)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => {
+      console.error('MongoDB connection error:', err);
+      throw err;
+    });
 }
 
 module.exports= connectDB;

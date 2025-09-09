@@ -4,7 +4,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
-.env
+
 
 # React build
 client/node_modules/
@@ -15,7 +15,7 @@ client/.env
 server/node_modules/
 server/dist/
 server/logs/
-server/.env
+
 
 # IDE/editor
 .vscode/

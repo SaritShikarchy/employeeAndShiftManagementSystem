@@ -14,12 +14,9 @@ const app = express()
 //process.env.PORT is a port which is created by Render, and the server listen to it
 const PORT = process.env.PORT || 5000
 
-const corsOptions = {origin: 'https://employee-and-shift-management-syste.vercel.app'};
-
-// Use the cors middleware with the new options
-app.use(cors(corsOptions));
 //Middelwares
 app.use(express.json())
+app.use (cors())
 
 //this is Middleware, means that adress with http:/localhost/employees will be moved to employeesRouter
 app.use('/employees', employeesRouter)
