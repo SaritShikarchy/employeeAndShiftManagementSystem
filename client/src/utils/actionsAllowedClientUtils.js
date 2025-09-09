@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { todayStr } from '../utils/dateUtils';
-const PORT = 'http://localhost:5000';
+//const PORT = 'http://localhost:5000';
+const PORT = import.meta.env.VITE_BACKEND_URL;
 
 export async function actionsAllowedClientUtils(userId){
 
@@ -8,21 +9,6 @@ export async function actionsAllowedClientUtils(userId){
     console.error('actionsAllowedClientUtils: missing userId');
     return { ok: false, reason: 'NO_USER', msg: 'missing userId' };
   }
-
-//   try {
-//     await axios.post(`${API_BASE}/userAction`, {userId ,date: todayStr()});
-//     return { ok: true };
-//   } 
-//   catch (err) {
-//     const status = err.response?.status;
-//     if (status === 403) return { ok: false, reason: 'DAILY_LIMIT', msg: err.response?.data?.error };
-//     if (status === 404) return { ok: false, reason: 'NOT_FOUND',  msg: err.response?.data?.error };
-
-//     console.error('actionsAllowed error:', err);
-//     return { ok: false, msg: 'server error' };
-//   }
-// }
-
 
 try {
   
