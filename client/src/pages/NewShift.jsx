@@ -7,7 +7,7 @@ import { TextField, Grid, Paper, Typography, Container, Link, Box , Stack, Butto
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
-const SHIFTS_URL= "http://localhost:5000/shifts"
+const SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/shifts`;
 
 const NewShift = () => {
     const [shift, setShift]= useState({date: '', startingHour:'', endingHour:''});

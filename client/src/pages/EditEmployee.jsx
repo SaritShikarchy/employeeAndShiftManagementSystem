@@ -10,10 +10,10 @@ import { toDateInputValue } from '../utils/dateUtils';
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
-const EMPLOYEES_URL='http://localhost:5000/employees'
-const DEPARTMENT_URL='http://localhost:5000/departments'
-const EMPLOYEES_SHIFTS_URL='http://localhost:5000/employeesShifts'
-const SHIFTS_URL= 'http://localhost:5000/shifts'
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`; 
+const DEPARTMENT_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`;
+const EMPLOYEES_SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/employeesShifts`;
+const SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/shifts`;
 
 const EditEmployee = () => {
 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '' , departmentId:''});

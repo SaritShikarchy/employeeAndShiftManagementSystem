@@ -8,8 +8,8 @@ import {Container,Grid,Stack, Typography,Link,Paper,Box,TextField,MenuItem,Butto
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
-const EMPLOYEES_URL='http://localhost:5000/employees'
-const DEPARTMENT_URL='http://localhost:5000/departments'
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`; 
+const DEPARTMENT_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`; 
 
 const EditDepartment = () => {
   const [employees, setEmployees] = useState([]);

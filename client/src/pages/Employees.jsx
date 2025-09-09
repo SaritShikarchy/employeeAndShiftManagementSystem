@@ -5,10 +5,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Stack, TextField, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Button} from '@mui/material';
 
-const EMPLOYEES_URL = 'http://localhost:5000/employees';
-const DEPARTMENT_URL = 'http://localhost:5000/departments';
-const EMPLOYEES_SHIFTS_URL = 'http://localhost:5000/employeesShifts';
-const SHIFTS_URL = 'http://localhost:5000/shifts';
+//const EMPLOYEES_URL = 'http://localhost:5000/employees';
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
+const DEPARTMENT_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`;
+const EMPLOYEES_SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/employeesShifts`;
+const SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/shifts`;
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);

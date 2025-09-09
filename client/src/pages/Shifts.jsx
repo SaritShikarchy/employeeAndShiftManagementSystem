@@ -4,8 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { Stack, Grid, Table, TableHead, TableBody, TableRow, TableCell, Paper, Typography, Container, Link, Button} from '@mui/material';
 
-const EMPLOYEES_URL = 'http://localhost:5000/employees';
-const SHIFTS_URL = 'http://localhost:5000/shifts';
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
+const SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/shifts`;
 
 const Shifts = () => {
     const [employees, setEmployees] = useState([]);

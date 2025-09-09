@@ -7,8 +7,8 @@ import { TextField, Grid, Paper, Typography, Container, Link, Box , Stack,MenuIt
 import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
-const EMPLOYEES_URL="http://localhost:5000/employees"
-const DEPARTMETS_URL= "http://localhost:5000/departments"
+//const EMPLOYEES_URL="http://localhost:5000/employees"
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
 
 const NewEmployee = () => {
 const [employee, setEmployee] = useState({firstName: '',  lastName: '',  startWorkYear: '', departmentId:''});

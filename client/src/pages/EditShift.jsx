@@ -13,9 +13,10 @@ import { actionsAllowedClientUtils } from '../utils/actionsAllowedClientUtils';
 import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 import { useMemo } from 'react';
 
-const EMPLOYEES_URL='http://localhost:5000/employees'
-const SHIFTS_URL='http://localhost:5000/shifts'
-const EMPLOYEES_SHIFTS_URL='http://localhost:5000/employeesShifts'
+//const EMPLOYEES_URL='http://localhost:5000/employees'
+const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
+const SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/shifts`;
+const EMPLOYEES_SHIFTS_URL = `${import.meta.env.VITE_BACKEND_URL}/employeesShifts`;
 
 const EditShift = () => {
   const [employees, setEmployees] = useState([]);
