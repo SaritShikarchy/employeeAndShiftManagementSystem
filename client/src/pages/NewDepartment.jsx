@@ -9,7 +9,7 @@ import { actionHandlerUtils } from '../utils/actionHandlerUtils';
 
 //const EMPLOYEES_URL="http://localhost:5000/employees"
 const EMPLOYEES_URL = `${import.meta.env.VITE_BACKEND_URL}/employees`;
-const DEPARTMETS_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`; 
+const DEPARTMENTS_URL = `${import.meta.env.VITE_BACKEND_URL}/departments`; 
 
 const NewDepartment = () => {
     const [employees, setEmployees]= useState([]);
@@ -53,7 +53,7 @@ const NewDepartment = () => {
         
         try {
         //res includes the object that was added, according the post defenition
-        const res = await axios.post(DEPARTMETS_URL, department);
+        const res = await axios.post(DEPARTMENTS_URL, department);
         const createdDepartment = res.data;
 
         //save the id of the new created department
@@ -70,7 +70,7 @@ const NewDepartment = () => {
         navigate('/departments', { state: { user } });
         } catch (err) {
         console.error('Failed:', err.response?.data || err.message);
-        alert(err.response?.data?.message || 'Server error – could not add department');
+        alert(err.response?.data?.message || 'Server error: could not add department');
       }
       const res= await actionsAllowedClientUtils(userId);
         //res includes {ok: false} or {ok: true}
