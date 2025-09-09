@@ -26,6 +26,12 @@ const NewShift = () => {
     const addNewShift = async (e) => {
       //preventing performing refresh
       e.preventDefault();
+       //checks if all fields were filed in
+        if ((!shift.date) || (!shift.startingHour) || (!shift.endingHour)) {
+            alert ("Please fill in all fields");
+            return;
+        }
+
       const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
       if (!userId) {
               alert('Please reconnect to system');

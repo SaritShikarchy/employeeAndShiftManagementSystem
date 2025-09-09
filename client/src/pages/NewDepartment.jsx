@@ -37,6 +37,11 @@ const NewDepartment = () => {
     const addDepartmentAndManagerProcess = async (e) => {
         //preventing performing refresh
         e.preventDefault();
+        //checks if all fields were filed in
+        if ((!department.name) || (!department.manager)) {
+            alert ("Please fill in all fields");
+            return;
+        }
         //locate the value of user.id
         const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
         if (!userId) {
@@ -44,9 +49,7 @@ const NewDepartment = () => {
           navigate('/', { replace: true });
           return;
         }
-        const res= await actionsAllowedClientUtils(userId);
-        //res includes {ok: false} or {ok: true}
-        if (!actionHandlerUtils(res, navigate)) return;
+        
         try {
         //res includes the object that was added, according the post defenition
         const res = await axios.post(DEPARTMETS_URL, department);
@@ -68,6 +71,9 @@ const NewDepartment = () => {
         console.error('Failed:', err.response?.data || err.message);
         alert(err.response?.data?.message || 'Server error – could not add department');
       }
+      const res= await actionsAllowedClientUtils(userId);
+        //res includes {ok: false} or {ok: true}
+        if (!actionHandlerUtils(res, navigate)) return;
     };
 
     const cancelAddDepartmentProcess= (e) =>{

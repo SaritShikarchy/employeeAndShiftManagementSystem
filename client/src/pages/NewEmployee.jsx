@@ -36,6 +36,11 @@ const getAllDepartments = async () => {
 
 const addEmployeeProcess= async(e) =>{
       e.preventDefault();
+       //checks if all fields were filed in
+        if ((!employee.firstName) || (!employee.lastName)|| (!employee.startWorkYear) || (!employee.departmentId)) {
+            alert ("Please fill in all fields");
+            return;
+        }
       //locate the value of user.id
       const userId = typeof user === 'string' ? user : user?.id ?? user?._id 
 
