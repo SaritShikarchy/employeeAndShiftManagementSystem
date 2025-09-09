@@ -10,7 +10,9 @@ const employeesShiftsRouter = require ('./routers/employeesShiftsRouter')
 const usersActionsRouter = require ('./routers/usersActionsRouter')
 
 const app = express()
-const PORT = 5000
+//process.env.PORT was added in order to use live demo
+//process.env.PORT is a port which is created by Render, and the server listen to it
+const PORT = process.env.PORT || 5000
 
 //Middelwares
 app.use(express.json())
@@ -25,6 +27,6 @@ app.use('/employeesShifts', employeesShiftsRouter)
 app.use('/userAction', usersActionsRouter)
 
 app.listen (PORT, () => {
-    console.log (`App is listening to http://localhost:${PORT}`)
+    console.log (`App is listening on port: ${PORT}`)
     connectDB();
 });
