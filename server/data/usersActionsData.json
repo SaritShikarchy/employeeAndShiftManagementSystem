@@ -27,31 +27,31 @@
     {
       "id": 2,
       "maxActions": 500,
-      "date": "09/09/2025",
+      "date": "30/09/2025",
       "actionAllowd": 41
     },
     {
       "id": 2,
       "maxActions": 500,
-      "date": "10/09/2025",
+      "date": "01/10/2025",
       "actionAllowd": 3
     },
     {
       "id": 2,
       "maxActions": 500,
-      "date": "12/09/2025",
+      "date": "02/10/2025",
       "actionAllowd": 3
     },
     {
       "id": 2,
       "maxActions": 500,
-      "date": "13/09/2025",
-      "actionAllowd": 1
+      "date": "03/10/2025",
+      "actionAllowd": 100
     },
     {
       "id": 2,
       "maxActions": 500,
-      "date": "14/09/2025",
+      "date": "04/10/2025",
       "actionAllowd": 2
     },
     {
