@@ -48,16 +48,6 @@ API: https://employeeandshiftmanagementsystem.onrender.com
 - Each user has a limited number of actions per day
 - When the user exceeds the limit, the system logs him out until the next day and shows a message
 
-Example of a user record:
-```json
-{
-  "id": 2,
-  "maxActions": 500,
-  "date": "18/09/2025",
-  "actionAllowd": 0
-}
-
-
 ## Technologies
 - Backend: Node.js, Express, MongoDB
 - Frontend: REACT, HTML, CSS, JavaScript
@@ -79,7 +69,7 @@ npm run dev
 - Each user has a several number of actions they can perform per day.
 - To Login with a specific user add a record for this user and current day at 'server/data/usersActionsData.json' file.
 - The record that should be added looks as follows:
-```json
+
 {
 "id": <user_id>,
 "maxActions": 5,
