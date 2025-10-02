@@ -60,7 +60,7 @@ API: https://employeeandshiftmanagementsystem.onrender.com
 ## Installation & Running Locally
 - Clone the repository: Git clone https://github.com/your-username/factory-management.git
 - Install and run the Backend:
-
+```bash
 cd server
 npm install
 npm start
