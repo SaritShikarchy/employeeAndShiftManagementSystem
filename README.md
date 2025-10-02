@@ -1,96 +1,93 @@
-# Factory Management System
+Factory Management System Final Project: REACT+ Node.js - Fullstack Application [1]
+A complete system for managing employees, departments, and shifts in a factory. [1]
+The project includes both Backend (Node.js + Express + MongoDB) and Frontend (REACT, HTML, CSS, JavaScript). [1]
+Live Demo [1]
 
-Final Project - Fullstack App (React + Node.js + MongoDB)
+*   View Live Demo: https://employee-and-shift-management-syste.vercel.app/ [1]
+    *   For example you can connect with: username: Antonette email: Shanna@melissa.tv [1]
+*   Backend API hosted on Render: https://employeeandshiftmanagementsystem.onrender.com [1]
 
-System for managing employees, departments, and shifts in a factory.  
-Includes Backend (Node.js + Express + MongoDB) and Frontend (React, HTML, CSS, JavaScript).
+## Main Features [2]
 
----
-## Project Specification:
-https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf
+*   **Authentication:** Only registered users can log in (validated via external API) [2]
+    *   The users are listed here: https://jsonplaceholder.typicode.com/users [2]
+*   **Employee Management:** [2]
+    *   View all employees in the factory and their assigned shifts [2]
+    *   Add employee [2]
+    *   Update employee [2]
+    *   Delete employee [2]
+    *   Assign shift to employee [2]
+*   **Department Management:** [2]
+    *   View all departments in the factory and their assigned managers [2]
+    *   Add department [2]
+    *   Update department [2]
+    *   Delete department [2]
+    *   Assign employee to department [2]
+*   **Shift Management:** [3]
+    *   View all shifts in the factory [3]
+    *   Add shift [3]
+    *   Update shift [3]
+    *   Assign employee to shift [3]
+*   **User System:** [3]
+    *   Each user has a limited number of actions per day [3, 4]
+    *   When the limit is reached, the user is logged out until the next day and a prompt message is displayed [3, 4]
 
-## Credits
-Developed by Sarit Shikarchy Node.js + REACT- Final Project
+## Technologies [3]
 
-## Demo
-Live system: https://employee-and-shift-management-syste.vercel.app/  
-(For testing you can use: username: Antonette, email: Shanna@melissa.tv)
+*   **Backend:** Node.js, Express, MongoDB [3]
+*   **Frontend:** REACT, HTML, CSS, JavaScript [3]
+*   **Deployment:** Vercel (Frontend), Render (Backend) [3]
 
-API: https://employeeandshiftmanagementsystem.onrender.com
+## Users [3]
 
----
+*   Only pre-registered users are allowed to log in. [3]
+    *   The users are listed here: https://jsonplaceholder.typicode.com/users [3]
+*   Each user has a daily action limit. [4]
+    *   The users and their limitations are detailed on `'server/data/usersActionsData.json'` [4]
+*   When the limit is reached, the user is logged out until the next day and a prompt message is displayed [4]
 
-## Features
+## Installation & Running Locally [4]
 
-### Authentication
-- Only predefined users can log in
-- The users come from: https://jsonplaceholder.typicode.com/users
+*   Clone the repository: [4]
+    ```bash
+    Git clone https://github.com/your-username/factory-management.git
+    ``` [4]
+*   Install and run the Backend: [4]
+    *   `cd server` [4]
+    *   `npm install` [4]
+    *   `npm start` [4]
+*   Install and run the Frontend: [4]
+    *   `cd client` [4]
+    *   `npm install` [4]
+    *   `npm run dev` [4]
+*   Define allowed actions per user for a specific day [4]
+    *   Each user has a several number of actions they can perform per day. [4]
+    *   To Login with a specific user add a record for this user and current day at `'server/data/usersActionsData.json'` file. [4, 5]
+    *   The record that should be added looks as follows: [5]
 
-### Employees
-- View all employees + their shifts
-- Add employee
-- Update employee
-- Delete employee
-- Assign employee to a shift
+    ```json
+    {
+       "id": <user_id>,
+       "maxActions": 5,
+       "date": "<dd/mm/yyyy>",
+       "actionAllowd": <numOfActionsUsedTodayForThisUser>
+    }
+    ``` [5]
+    *   `<user_id>` is the user_id according to: https://jsonplaceholder.typicode.com/users [5]
+    *   `<dd/mm/yyyy>` is the current date [5]
+    *   `<actionAllowedForThisUser>` is the number of actions used so far today for this user, the value in this field must be lower than maxActions [5]
 
-### Departments
-- View departments + their managers
-- Add department
-- Update department
-- Delete department
-- Assign employee to a department
+*   For Example you can add: [6]
+    ```json
+    {
+       "id": 2,
+       "maxActions": 500,
+       "date": "18/09/2025",
+       "actionAllowd": 0
+    }
+    ``` [6]
 
-### Shifts
-- View all factory shifts
-- Add shift
-- Update shift
-- Assign employees to shifts
+Project Specification: https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf [6]
 
-### Users
-- Only pre-registered users are allowed to log in
-- The users are listed here: https://jsonplaceholder.typicode.com/users
-- Each user has a limited number of actions per day
-- When the user exceeds the limit, the system logs him out until the next day and shows a message
-
-## Technologies
-- Backend: Node.js, Express, MongoDB
-- Frontend: REACT, HTML, CSS, JavaScript
-- Deployment: Vercel (Frontend), Render (Backend)
-
-## Installation & Running Locally
-- Clone the repository: Git clone https://github.com/your-username/factory-management.git
-- Install and run the Backend:
-```bash
-cd server
-npm install
-npm start
-Install and run the Frontend:
-cd client
-npm install
-npm run dev
-
-- Define allowed actions per user for a specific day
-- Each user has a several number of actions they can perform per day.
-- To Login with a specific user add a record for this user and current day at 'server/data/usersActionsData.json' file.
-- The record that should be added looks as follows:
-
-{
-"id": <user_id>,
-"maxActions": 5,
-"date": "<dd/mm/yyyy>",
-"actionAllowd": <numOfActionsUsedTodayForThisUser>
-},
-
-- <user_id> is the user_id according to: https://jsonplaceholder.typicode.com/users
-- <dd/mm/yyyy> is the current date
-- <actionAllowedForThisUser> is the number of actions used so far today for this user,the value in this field must be lower than "maxActions"
-For Example you can add:
-```json
-{
-"id": 2,
-"maxActions": 500,
-"date": "18/09/2025",
-"actionAllowd": 0
-}
-
-
+Credits [6]
+Developed by Sarit Shikarchy Node.js + REACT- Final Project [6]
