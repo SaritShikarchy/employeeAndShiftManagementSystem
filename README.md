@@ -6,9 +6,13 @@ System for managing employees, departments, and shifts in a factory.
 Includes Backend (Node.js + Express + MongoDB) and Frontend (React, HTML, CSS, JavaScript).
 
 ---
+## Project Specification:
+https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf
+
+## Credits
+Developed by Sarit Shikarchy Node.js + REACT- Final Project
 
 ## Demo
-
 Live system: https://employee-and-shift-management-syste.vercel.app/  
 (For testing you can use: username: Antonette, email: Shanna@melissa.tv)
 
@@ -89,8 +93,4 @@ For Example you can add:
 "actionAllowd": 0
 }
 
-## Project Specification:
-https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf
 
-## Credits
-Developed by Sarit Shikarchy Node.js + REACT- Final Project
