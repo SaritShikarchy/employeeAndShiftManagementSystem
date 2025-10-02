@@ -2,15 +2,15 @@
 
 Final Project - Fullstack App (React + Node.js + MongoDB)
 
-מערכת לניהול עובדים, מחלקות ומשמרות במפעל.  
-כוללת צד שרת (Node.js + Express + MongoDB) וצד לקוח (React, HTML, CSS, JavaScript).
+System for managing employees, departments, and shifts in a factory.  
+Includes Backend (Node.js + Express + MongoDB) and Frontend (React, HTML, CSS, JavaScript).
 
 ---
 
 ## Demo
 
-מערכת חיה: https://employee-and-shift-management-syste.vercel.app/  
-(לצורך בדיקה ניתן להשתמש בנתוני משתמש לדוגמה: username: Antonette, email: Shanna@melissa.tv)
+Live system: https://employee-and-shift-management-syste.vercel.app/  
+(For testing you can use: username: Antonette, email: Shanna@melissa.tv)
 
 API: https://employeeandshiftmanagementsystem.onrender.com
 
@@ -19,35 +19,35 @@ API: https://employeeandshiftmanagementsystem.onrender.com
 ## Features
 
 ### Authentication
-- רק משתמשים שהוגדרו מראש יכולים להתחבר
-- המשתמשים מגיעים ממערכת חיצונית: https://jsonplaceholder.typicode.com/users
+- Only predefined users can log in
+- The users come from: https://jsonplaceholder.typicode.com/users
 
 ### Employees
-- צפייה בכל העובדים + המשמרות שלהם
-- הוספת עובד
-- עדכון פרטי עובד
-- מחיקת עובד
-- שיבוץ עובד למשמרת
+- View all employees + their shifts
+- Add employee
+- Update employee
+- Delete employee
+- Assign employee to a shift
 
 ### Departments
-- צפייה במחלקות + המנהלים שלהן
-- הוספת מחלקה
-- עדכון מחלקה
-- מחיקת מחלקה
-- שיבוץ עובד למחלקה
+- View departments + their managers
+- Add department
+- Update department
+- Delete department
+- Assign employee to a department
 
 ### Shifts
-- צפייה במשמרות במפעל
-- הוספת משמרת
-- עדכון משמרת
-- שיבוץ עובדים למשמרת
+- View all factory shifts
+- Add shift
+- Update shift
+- Assign employees to shifts
 
 ### Users
-- לכל משתמש יש מספר פעולות מוגבל ליום
-- כאשר המשתמש חורג מהמגבלה – המערכת מנתקת אותו ומציגה הודעה
-- פרטי המשתמשים נשמרים ב־server/data/usersActionsData.json
+- Each user has a limited number of actions per day
+- When the user exceeds the limit, the system logs him out and shows a message
+- User details are saved in server/data/usersActionsData.json
 
-דוגמה לרשומת משתמש:
+Example of a user record:
 ```json
 {
   "id": 2,
