@@ -1,117 +1,94 @@
-# Factory Management System
-## Final Project: REACT + Node.js - Fullstack Application
+Factory Management System Final Project: REACT+ Node.js - Fullstack Application [1]
+A complete system for managing employees, departments, and shifts in a factory. [1]
+The project includes both Backend (Node.js + Express + MongoDB) and Frontend (REACT, HTML, CSS, JavaScript). [1]
+Live Demo [1]
 
-[cite_start]A complete system for managing employees, departments, and shifts in a factory[cite: 3].
-[cite_start]The project includes both **Backend (Node.js + Express + MongoDB)** and **Frontend (REACT, HTML, CSS, JavaScript)**[cite: 4].
+*   View Live Demo: https://employee-and-shift-management-syste.vercel.app/ [1]
+    *   For example you can connect with: username: Antonette email: Shanna@melissa.tv [1]
+*   Backend API hosted on Render: https://employeeandshiftmanagementsystem.onrender.com [1]
 
----
+## Project Specification: https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf [6]
 
-## Live Demo
-* [cite_start]View Live Demo[cite: 6]:
-    * [cite_start]**https://employee-and-shift-management-syste.vercel.app/** [cite: 7]
-    * [cite_start]For example you can connect with[cite: 8]:
-        * [cite_start]username: **Antonette** [cite: 9]
-        * [cite_start]email: **Shanna@melissa.tv** [cite: 10]
-* [cite_start]Backend API hosted on Render[cite: 11]:
-    * [cite_start]**https://employeeandshiftmanagementsystem.onrender.com** [cite: 12]
+## Credits [6]
+Developed by Sarit Shikarchy Node.js + REACT- Final Project [6]
 
----
+## Main Features [2]
 
-## Main Features
-* [cite_start]**Authentication**: Only registered users can log in (validated via external API)[cite: 14].
-    * [cite_start]The users are listed here: https://jsonplaceholder.typicode.com/users[cite: 15].
-* [cite_start]**Employee Management**[cite: 16]:
-    * [cite_start]View all employees in the factory and their assigned shifts [cite: 17]
-    * [cite_start]Add employee [cite: 18]
-    * [cite_start]Update employee [cite: 19]
-    * [cite_start]Delete employee [cite: 20]
-    * [cite_start]Assign shift to employee [cite: 21]
-* [cite_start]**Department Management**[cite: 22]:
-    * [cite_start]View all departments in the factory and their assigned managers [cite: 23]
-    * [cite_start]Add department [cite: 25]
-    * [cite_start]Update department [cite: 26]
-    * [cite_start]Delete department [cite: 27]
-    * [cite_start]Assign employee to department [cite: 28]
-* [cite_start]**Shift Management**[cite: 29]:
-    * [cite_start]View all shifts in the factory [cite: 30]
-    * [cite_start]Add shift [cite: 31]
-    * [cite_start]Update shift [cite: 32]
-    * [cite_start]Assign employee to shift [cite: 33]
-* [cite_start]**User System**[cite: 34]:
-    * [cite_start]Each user has a limited number of actions per day[cite: 35].
-    * [cite_start]When the limit is reached, the user is logged out until the next day and a prompt message is displayed[cite: 36].
+*   **Authentication:** Only registered users can log in (validated via external API) [2]
+    *   The users are listed here: https://jsonplaceholder.typicode.com/users [2]
+*   **Employee Management:** [2]
+    *   View all employees in the factory and their assigned shifts [2]
+    *   Add employee [2]
+    *   Update employee [2]
+    *   Delete employee [2]
+    *   Assign shift to employee [2]
+*   **Department Management:** [2]
+    *   View all departments in the factory and their assigned managers [2]
+    *   Add department [2]
+    *   Update department [2]
+    *   Delete department [2]
+    *   Assign employee to department [2]
+*   **Shift Management:** [3]
+    *   View all shifts in the factory [3]
+    *   Add shift [3]
+    *   Update shift [3]
+    *   Assign employee to shift [3]
+*   **User System:** [3]
+    *   Each user has a limited number of actions per day [3, 4]
+    *   When the limit is reached, the user is logged out until the next day and a prompt message is displayed [3, 4]
 
----
+## Technologies [3]
 
-## Technologies
-* [cite_start]**Backend**: Node.js, Express, MongoDB [cite: 38]
-* [cite_start]**Frontend**: REACT, HTML, CSS, JavaScript [cite: 39]
-* [cite_start]**Deployment**: Vercel (Frontend), Render (Backend) [cite: 40]
+*   **Backend:** Node.js, Express, MongoDB [3]
+*   **Frontend:** REACT, HTML, CSS, JavaScript [3]
+*   **Deployment:** Vercel (Frontend), Render (Backend) [3]
 
----
+## Users [3]
 
-## Users
-* [cite_start]Only pre-registered users are allowed to log in[cite: 42].
-    * [cite_start]The users are listed here: **https://jsonplaceholder.typicode.com/users**[cite: 43].
-* [cite_start]Each user has a daily action limit[cite: 44].
-    * [cite_start]The users and their limitations are detailed on `'server/data/usersActionsData.json'`[cite: 45].
-    * [cite_start]When the limit is reached, the user is logged out until the next day and a prompt message is displayed[cite: 45].
+*   Only pre-registered users are allowed to log in. [3]
+    *   The users are listed here: https://jsonplaceholder.typicode.com/users [3]
+*   Each user has a daily action limit. [4]
+    *   The users and their limitations are detailed on `'server/data/usersActionsData.json'` [4]
+*   When the limit is reached, the user is logged out until the next day and a prompt message is displayed [4]
 
----
+## Installation & Running Locally [4]
 
-## [cite_start]Installation & Running Locally [cite: 46]
-* [cite_start]**Clone the repository**[cite: 47]:
+*   Clone the repository: [4]
     ```bash
-    [cite_start]Git clone [https://github.com/your-username/factory-management.git](https://github.com/your-username/factory-management.git) [cite: 49]
-    ```
-* [cite_start]**Install and run the Backend**[cite: 50]:
-    ```bash
-    [cite_start]cd server [cite: 51]
-    [cite_start]npm install [cite: 53]
-    [cite_start]npm start [cite: 54]
-    ```
-* [cite_start]**Install and run the Frontend**[cite: 55]:
-    ```bash
-    [cite_start]cd client [cite: 56]
-    [cite_start]npm install [cite: 57]
-    [cite_start]npm run dev [cite: 58]
-    ```
-* [cite_start]**Define allowed actions per user for a specific day**[cite: 59]:
-    * [cite_start]Each user has a several number of actions they can perform per day[cite: 60].
-    * [cite_start]To Login with a specific user add a record for this user and current day at `'server/data/usersActionsData.json'` file[cite: 62].
-    * [cite_start]The record that should be added looks as follows[cite: 63]:
+    Git clone https://github.com/your-username/factory-management.git
+    ``` [4]
+*   Install and run the Backend: [4]
+    *   `cd server` [4]
+    *   `npm install` [4]
+    *   `npm start` [4]
+*   Install and run the Frontend: [4]
+    *   `cd client` [4]
+    *   `npm install` [4]
+    *   `npm run dev` [4]
+*   Define allowed actions per user for a specific day [4]
+    *   Each user has a several number of actions they can perform per day. [4]
+    *   To Login with a specific user add a record for this user and current day at `'server/data/usersActionsData.json'` file. [4, 5]
+    *   The record that should be added looks as follows: [5]
 
     ```json
     {
-        [cite_start]"id": <user_id>, [cite: 66]
-        [cite_start]"maxActions": 5, [cite: 67]
-        [cite_start]"date": "<dd/mm/yyyy>", [cite: 68]
-        [cite_start]"actionAllowd": <numOfActions Used TodayForThisUser> [cite: 69]
+       "id": <user_id>,
+       "maxActions": 5,
+       "date": "<dd/mm/yyyy>",
+       "actionAllowd": <numOfActionsUsedTodayForThisUser>
     }
-    ```
+    ``` [5]
+    *   `<user_id>` is the user_id according to: https://jsonplaceholder.typicode.com/users [5]
+    *   `<dd/mm/yyyy>` is the current date [5]
+    *   `<actionAllowedForThisUser>` is the number of actions used so far today for this user, the value in this field must be lower than maxActions [5]
 
-    * [cite_start]`<user_id>` is the user\_id according to: https://jsonplaceholder.typicode.com/users [cite: 70]
-    * [cite_start]`<dd/mm/yyyy>` is the current date [cite: 71]
-    * [cite_start]`<actionAllowedForThisUser>` is the number of actions used so far today for this user, the value in this field must be lower than `maxActions`[cite: 73].
-
-    * [cite_start]**For Example** you can add[cite: 74]:
-
+*   For Example you can add: [6]
     ```json
     {
-        [cite_start]"id": 2, [cite: 77]
-        [cite_start]"maxActions": 500, [cite: 78]
-        [cite_start]"date": "18/09/2025", [cite: 79]
-        [cite_start]"actionAllowd": 0 [cite: 80]
+       "id": 2,
+       "maxActions": 500,
+       "date": "18/09/2025",
+       "actionAllowd": 0
     }
-    ```
+    ``` [6]
 
----
-
-## Project Specification:
-* [cite_start]**https://employee-and-shift-management-syste.vercel.app/docs/Final-Project-EmployeeShiftManagementSystem.pdf** [cite: 82]
-
----
-
-## Credits
-* [cite_start]Developed by **Sarit Shikarchy** [cite: 85]
-* [cite_start]Node.js + REACT - Final Project [cite: 86]
