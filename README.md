@@ -11,7 +11,10 @@ The project includes both Backend (Node.js + Express + MongoDB) and Frontend (RE
   [https://employee-and-shift-management-syste.vercel.app/](https://employee-and-shift-management-syste.vercel.app/)
   For example you can connect with:
   - username: Antonette
-  - email: Shanna@melissa.tv
+  - email: Shanna@melissa.tv 
+  > [!NOTE]
+  > If you see the message "no daily record found for user", follow the instructions in the section "Define allowed actions per user for a specific day" under "Installation & Running   Locally" below.
+
 - Backend API hosted on Render:
   [https://employeeandshiftmanagementsystem.onrender.com](https://employeeandshiftmanagementsystem.onrender.com)
 
