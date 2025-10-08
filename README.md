@@ -76,8 +76,8 @@ The record that should be added looks as follows:
 }  
   
   - <user_id> is the user_id according to: https://jsonplaceholder.typicode.com/users  
-  - <dd/mm/yyyy> is the current date  
-  - <actionAllowedForThisUser> is the number of actions used so far today for this user, the value must be lower than maxActions.
+  - <dd/mm/yyyy> is the current date
+  - ActionAllowedForThisUser is the number of actions used so far today for this user, the value must be lower than maxActions.
 
 For Example you can add:  
 {  
