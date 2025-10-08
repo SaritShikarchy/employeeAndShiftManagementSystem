@@ -70,14 +70,15 @@ npm run dev
 The record that should be added looks as follows:  
 {  
 "id": <user_id>,  
-"maxActions": 5,  
+"maxActions": <max_Actions_per_user_per_day>,  
 "date": "<dd/mm/yyyy>",  
-"actionAllowd": <numOfActionsUsedTodayForThisUser>  
+"actionAllowd": <num_Of_Actions_Used_Today_For_This_User>   
 }  
-  
-  - <user_id> is the user_id according to: https://jsonplaceholder.typicode.com/users  
+
+  - <max_Actions_per_user_per_day> is the maximum actions that allows for <user_id> user for the current day (which mentioned on <dd/mm/yyyy>)
+  - <user_id> is the user_id according to: https://jsonplaceholder.typicode.com/users
   - <dd/mm/yyyy> is the current date
-  - ActionAllowedForThisUser is the number of actions used so far today for this user, the value must be lower than maxActions.
+  - <num_Of_Actions_Used_Today_For_This_User> is the number of actions used so far today for this user, the value must be lower than <max_Actions_per_user_per_day>.
 
 For Example you can add:  
 {  
