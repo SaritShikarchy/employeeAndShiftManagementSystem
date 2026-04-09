@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000
 const corsOptions = {
     origin: 'https://employee-and-shift-management-syste.vercel.app'
 }
-
+app.use(cors())
 //Middelwares
 app.use(express.json())
 app.use(cors(corsOptions))
